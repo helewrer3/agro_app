@@ -30,3 +30,19 @@ var navBarTitle = {
   3: "News",
   4: "Marketplace",
 };
+
+var appBarActiveActionWidget = {
+  0: Text(""),
+  1: Icon(Icons.add_a_photo),
+  2: Text(""),
+  3: Icon(Icons.cloud),
+  4: Icon(Icons.add),
+};
+
+var appBarActiveActionTask = {
+  0: null,
+  1: null,
+  2: null,
+  3: null,
+  4: null,
+};

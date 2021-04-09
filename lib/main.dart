@@ -38,6 +38,7 @@ class _BaseTemplateState extends State<BaseTemplate> {
   String _appBarText = "Tools";
   Color _appBarColor = Colors.green;
   Widget _showPage = ToolsSection();
+  Widget _appBarAction = Text("");
 
   Widget _screenSetter(int index) {
     switch (index) {
@@ -50,6 +51,7 @@ class _BaseTemplateState extends State<BaseTemplate> {
 
   String _appBarTitle(int index) => appBarTitleText[index];
   Color _appBarBGColor(int index) => appBarBackgroundColor[index];
+  Widget _appBarActiveAction(int index) => appBarActiveActionWidget[index];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,7 @@ class _BaseTemplateState extends State<BaseTemplate> {
         title: Text(_appBarText),
         backgroundColor: _appBarColor,
         centerTitle: true,
+        actions: [InkWell(onTap: null, child: _appBarAction)],
       ),
       body: _showPage,
       bottomNavigationBar: _bottomNavBar(),
@@ -88,6 +91,7 @@ class _BaseTemplateState extends State<BaseTemplate> {
           _showPage = _screenSetter(index);
           _appBarText = _appBarTitle(index);
           _appBarColor = _appBarBGColor(index);
+          _appBarAction = _appBarActiveAction(index);
         });
       },
     );
