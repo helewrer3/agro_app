@@ -6,12 +6,22 @@ import 'package:tflite/tflite.dart';
 import 'package:flutter/services.dart';
 import 'cure.dart';
 
-class DiseasePrediction extends StatefulWidget {
+class DiseasePrediction extends StatelessWidget {
   @override
-  _DiseasePredictionState createState() => _DiseasePredictionState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MyApp(),
+    );
+  }
 }
 
-class _DiseasePredictionState extends State<DiseasePrediction> {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => new _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   File _image;
   List _recognitions;
   String diseaseName = "";
@@ -49,8 +59,7 @@ class _DiseasePredictionState extends State<DiseasePrediction> {
   }
 
   Future<void> predictImagePickerGallery(BuildContext context) async {
-    final _picker = ImagePicker();
-    var image = await _picker.getImage(source: ImageSource.gallery);
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (image == null) return;
     setState(() {
       _busy = true;
@@ -61,12 +70,11 @@ class _DiseasePredictionState extends State<DiseasePrediction> {
   }
 
   Future<void> predictImagePickerCamera(BuildContext context) async {
-    final _picker = ImagePicker();
-    var image = await _picker.getImage(source: ImageSource.camera);
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
     if (image == null) return;
     setState(() {
       _busy = true;
-      _image = image as File;
+      _image = image;
     });
     Navigator.of(context).pop();
     recognizeImage(image);
@@ -123,7 +131,7 @@ class _DiseasePredictionState extends State<DiseasePrediction> {
     }
   }
 
-  Future recognizeImage(PickedFile image) async {
+  Future recognizeImage(File image) async {
     var recognitions = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 6,
@@ -230,8 +238,17 @@ class _DiseasePredictionState extends State<DiseasePrediction> {
       stackChildren.add(const Center(child: CircularProgressIndicator()));
     }
 
-    return Stack(
-      children: stackChildren,
+    return Scaffold(
+      body: Stack(
+        children: stackChildren,
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     _showDialog(context);
+      //   },
+      //   tooltip: 'Pick Image',
+      //   child: Icon(Icons.camera),
+      // ),
     );
   }
 }
