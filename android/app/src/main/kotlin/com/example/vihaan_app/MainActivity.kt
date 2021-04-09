@@ -1,4 +1,4 @@
-package com.example.plantdisease_app
+package com.example.vihaan_app
 
 import io.flutter.embedding.android.FlutterActivity
 
