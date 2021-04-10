@@ -40,7 +40,7 @@ class AddProductScreen extends StatelessWidget {
                 decoration: InputDecoration(labelText: 'Number'),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.number,
-                onChanged: (val){price = '$num';},
+                onChanged: (val){price = 'tel:$num';},
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Description'),

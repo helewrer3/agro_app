@@ -74,6 +74,16 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+        Container(child: Image.asset('assets/images/logo.png'), width: 200),
+        Text('AGRO APP',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            decoration: TextDecoration.none
+          ),
+        ),
+        SizedBox(height: 20),
         RaisedButton(
           onPressed: () async {
             await loginAction();

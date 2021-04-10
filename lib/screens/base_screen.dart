@@ -5,6 +5,7 @@ import 'package:vihaan_app/screens/marketplace_screen.dart';
 import 'package:vihaan_app/screens/news_screen.dart';
 import 'package:vihaan_app/screens/tools_screen.dart';
 import 'package:vihaan_app/screens/yield_screen.dart';
+import 'package:vihaan_app/widgets/main_drawer.dart';
 import '../meta/global_vars.dart';
 import '../widgets/templates.dart';
 
@@ -61,6 +62,7 @@ class _BaseScreenState extends State<BaseScreen> {
           actions: [InkWell(onTap: null, child: _appBarAction)],
         ),
         body: _showPage,
+        drawer: MainDrawer(),
         bottomNavigationBar: _bottomNavBar(),
       ),
     );
