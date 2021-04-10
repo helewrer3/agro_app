@@ -4,11 +4,12 @@ On the opportunity provided by Vihaan 4.0, Our team HemSins and Company have com
 
 ## Functionalities
 Our aim is to create a app where a lot of issues faced by farmers can be resolved at one place.
-1. Market Place (both as seller and buyer)
-2. Crop Disease Prediction software and cure suggestion for diseases
-3. Crop yield estimate prediction
-4. News related to farming
-5. Live weather 
+1. Authentication
+2. Marketplace (both as seller and buyer)
+3. Crop Disease Prediction software and cure suggestion for diseases
+4. Crop yield estimate prediction
+5. News related to farming
+6. Live weather 
 
 ## Tech Stack Used
 
