@@ -1,9 +1,8 @@
 # AGRO APP 
 
-On the opportunity provided by Vihaan 4.0, our team HemSins and Company have come up with a one stop app for farmers: Agro App.
+On the opportunity provided by Vihaan 4.0, Our team HemSins and Company have come up with a one stop app for farmers: Agro App.
 
 ## Functionalities
-
 Our aim is to create a app where a lot of issues faced by farmers can be resolved at one place.
 1. Market Place (both as seller and buyer)
 2. Crop Disease Prediction software and cure suggestion for diseases

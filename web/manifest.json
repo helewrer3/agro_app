@@ -1,6 +1,6 @@
 {
-    "name": "plantdisease_app",
-    "short_name": "plantdisease_app",
+    "name": "vihaan_app",
+    "short_name": "vihaan_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
