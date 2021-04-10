@@ -22,9 +22,29 @@ Our aim is to create a app where a lot of issues faced by farmers can be resolve
 This repository contains all files required for the app. Files related to training of crop yield prediction algorithm and deployed flask server can be found here:- https://github.com/jatinpandey02/Crop-Yield-API-Flask
 
 ## Contributors
-| Contributor       | Github            |
-| -                 | -                 |
-| Hemang Sinha | https://github.com/hemangdtu |
-| Garvit Kansal | https://github.com/helewrer3 |
-| Shubham Shrivastava | https://github.com/Shubham6013 |
-| Jatin Pandey | https://github.com/jatinpandey02 |
+<table>
+<thead>
+  <tr>
+    <th>Contributors</th>
+    <th>GitHub</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Garvit Kansal</td>
+    <td><a href="https://github.com/helewrer3" target="_blank" rel="noopener noreferrer">https://github.com/helewrer3</a></td>
+  </tr>
+  <tr>
+    <td>Jatin Pandey</td>
+    <td><a href="https://github.com/jatinpandey02" target="_blank" rel="noopener noreferrer">https://github.com/jatinpandey02</a></td>
+  </tr>
+  <tr>
+    <td>Shubham Shrivastava</td>
+    <td><a href="https://github.com/Shubham6013" target="_blank" rel="noopener noreferrer">https://github.com/Shubham6013</a></td>
+  </tr>
+  <tr>
+    <td>Hemang Sinha</td>
+    <td><a href="https://github.com/hemangdtu" target="_blank" rel="noopener noreferrer">https://github.com/hemangdtu</a></td>
+  </tr>
+</tbody>
+</table>
