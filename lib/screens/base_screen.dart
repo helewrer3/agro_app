@@ -4,6 +4,7 @@ import 'package:vihaan_app/screens/disease_screen.dart';
 import 'package:vihaan_app/screens/marketplace_screen.dart';
 import 'package:vihaan_app/screens/news_screen.dart';
 import 'package:vihaan_app/screens/tools_screen.dart';
+import 'package:vihaan_app/screens/yield_screen.dart';
 import '../meta/global_vars.dart';
 import '../widgets/templates.dart';
 
@@ -19,6 +20,7 @@ class _BaseScreenState extends State<BaseScreen> {
   final ToolsScreen _toolsPage = ToolsScreen();
   final DiseasePrediction _diseasePredictionPage = DiseasePrediction();
   final NewsScreen _newsPage = NewsScreen();
+  final YieldScreen _yieldPage = YieldScreen();
   final MarketplaceScreen _marketplaceScreen = MarketplaceScreen();
 
   String _appBarText = "Tools";
@@ -32,6 +34,8 @@ class _BaseScreenState extends State<BaseScreen> {
         return _toolsPage;
       case 1:
         return _diseasePredictionPage;
+      case 2:
+        return _yieldPage;
       case 3:
         return _newsPage;
       case 4:
@@ -41,7 +45,8 @@ class _BaseScreenState extends State<BaseScreen> {
 
   String _appBarTitle(int index) => appBarTitleText[index];
   Color _appBarBGColor(int index) => appBarBackgroundColor[index];
-  Widget _appBarActiveAction(int index, BuildContext ctx) => appBarActiveActionWidget[index](ctx);
+  Widget _appBarActiveAction(int index, BuildContext ctx) =>
+      appBarActiveActionWidget[index](ctx);
 
   @override
   Widget build(BuildContext context) {

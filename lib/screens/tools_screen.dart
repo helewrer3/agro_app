@@ -9,7 +9,7 @@ class ToolsScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: appBarBackgroundColor[0],
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -20,7 +20,7 @@ class ToolsScreen extends StatelessWidget {
                 labelColor: Colors.black,
                 tabs: [
                   BarTab(name: 'All'),
-                  for(int i = 0; i < 3; i++)BarTab(name: categories[i])
+                  for (int i = 0; i < 3; i++) BarTab(name: categories[i])
                 ],
               ),
             ],
@@ -29,9 +29,13 @@ class ToolsScreen extends StatelessWidget {
         body: TabBarView(
           children: [
             TabView(list: tempList),
-            for(int i = 0; i < 3; i++)TabView(list: tempList.where((element) => element.category == i).toList())
+            for (int i = 0; i < 3; i++)
+              TabView(
+                  list: tempList
+                      .where((element) => element.category == i)
+                      .toList())
           ],
-        ),    
+        ),
       ),
     );
   }
@@ -40,7 +44,8 @@ class ToolsScreen extends StatelessWidget {
 class TabView extends StatelessWidget {
   final List<Widget> list;
   const TabView({
-    Key key, this.list,
+    Key key,
+    this.list,
   }) : super(key: key);
 
   @override
@@ -57,16 +62,16 @@ class TabView extends StatelessWidget {
 
 class BarTab extends StatelessWidget {
   final String name;
-  const BarTab({
-    Key key, this.name
-  }) : super(key: key);
+  const BarTab({Key key, this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Tab(
-      child: Text(name, style: TextStyle(
-        fontFamily: 'Varela',
-        fontSize: 18.0,
+      child: Text(
+        name,
+        style: TextStyle(
+          fontFamily: 'Varela',
+          fontSize: 18.0,
         ),
       ),
     );
