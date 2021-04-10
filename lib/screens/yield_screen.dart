@@ -97,9 +97,10 @@ class _ScreenModelState extends State<ScreenModel> {
         SizedBox(height: 15.0),
         ElevatedButton(
           onPressed: () {
+            print("Hello");
             _sendToServer(rainfall, pesticide, temperature, item);
           },
-          child: new Text('Send'),
+          child: Text('Send'),
         )
       ],
     );
@@ -112,17 +113,17 @@ class _ScreenModelState extends State<ScreenModel> {
     String url = "https://crop-yield-api.herokuapp.com/?";
     url += "rain=$rainPar&temp=$tempPar&pest=$pestPar&item=$cropPar";
     final response = await http.get(url);
-    // print(response.body);
+    print(url);
 
     PredictionData predictionData =
         PredictionData.fromJSON(jsonDecode(response.body));
 
     double cropYield = predictionData.data;
     // print(cropYield);
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Text("Predicted Yield\n$cropYield");
-        });
+    // showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return Text("Predicted Yield\n$cropYield");
+    //     });
   }
 }
