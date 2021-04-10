@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vihaan_app/meta/global_vars.dart';
 import '../meta/all.dart';
 import '../meta/fertilizers.dart';
 import '../meta/insecticides.dart';
@@ -12,7 +13,7 @@ class ToolsScreen extends StatelessWidget {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.green,
+          backgroundColor: appBarBackgroundColor[0],
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -33,12 +34,20 @@ class ToolsScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            TabView(screen: All(),),
-            TabView(screen: Fertilizers(),),
-            TabView(screen: Pesticides(),),
-            TabView(screen: Insecticide(),),
+            TabView(
+              screen: All(),
+            ),
+            TabView(
+              screen: Fertilizers(),
+            ),
+            TabView(
+              screen: Pesticides(),
+            ),
+            TabView(
+              screen: Insecticide(),
+            ),
           ],
-        ),    
+        ),
       ),
     );
   }
@@ -47,7 +56,8 @@ class ToolsScreen extends StatelessWidget {
 class TabView extends StatelessWidget {
   final Widget screen;
   const TabView({
-    Key key, this.screen,
+    Key key,
+    this.screen,
   }) : super(key: key);
 
   @override
@@ -62,16 +72,16 @@ class TabView extends StatelessWidget {
 
 class BarTab extends StatelessWidget {
   final String s;
-  const BarTab({
-    Key key, this.s
-  }) : super(key: key);
+  const BarTab({Key key, this.s}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Tab(
-      child: Text(s, style: TextStyle(
-        fontFamily: 'Varela',
-        fontSize: 18.0,
+      child: Text(
+        s,
+        style: TextStyle(
+          fontFamily: 'Varela',
+          fontSize: 18.0,
         ),
       ),
     );
