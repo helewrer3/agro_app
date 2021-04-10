@@ -16,7 +16,7 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   int _currentIndex = 0;
   final ToolsScreen _toolsPage = ToolsScreen();
-  final DiseaseScreen _diseasePredictionPage = DiseaseScreen();
+  final DiseasePrediction _diseasePredictionPage = DiseasePrediction();
   final NewsScreen _newsPage = NewsScreen();
 
   String _appBarText = "Tools";
@@ -32,13 +32,13 @@ class _BaseScreenState extends State<BaseScreen> {
         return _diseasePredictionPage;
       case 3:
         return _newsPage;
-
     }
   }
 
   String _appBarTitle(int index) => appBarTitleText[index];
   Color _appBarBGColor(int index) => appBarBackgroundColor[index];
-  Widget _appBarActiveAction(int index, BuildContext ctx) => appBarActiveActionWidget[index](ctx);
+  Widget _appBarActiveAction(int index, BuildContext ctx) =>
+      appBarActiveActionWidget[index](ctx);
 
   @override
   Widget build(BuildContext context) {
