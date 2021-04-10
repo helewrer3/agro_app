@@ -95,10 +95,10 @@ class _ScreenModelState extends State<ScreenModel> {
           },
         ),
         SizedBox(height: 15.0),
-        // ElevatedButton(
-        //   onPressed: _sendToServer(rainfall, pesticide, temperature, item),
-        //   child: new Text('Send'),
-        // )
+        ElevatedButton(
+          onPressed: () {_sendToServer(rainfall, pesticide, temperature, item);},
+          child: new Text('Send'),
+        )
       ],
     );
   }
@@ -112,8 +112,7 @@ class _ScreenModelState extends State<ScreenModel> {
     final response = await http.get(url);
     print(response.body);
 
-    PredictionData predictionData =
-        PredictionData.fromJSON(jsonDecode(response.body));
+    PredictionData predictionData = PredictionData.fromJSON(jsonDecode(response.body));
 
     double cropYield = predictionData.data;
     print(cropYield);
