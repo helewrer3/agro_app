@@ -1,16 +1,30 @@
-# vihaan_app
+# AGRO APP 
 
-A new Flutter project.
+On the opportunity provided by Vihaan 4.0, Our team HemSins and Company have come up with a one stop app for farmers: Agro App.
 
-## Getting Started
+## Functionalities
+Our aim is to create a app where a lot of issues faced by farmers can be resolved at one place.
+1. Market Place (both as seller and buyer)
+2. Crop Disease Prediction software and cure suggestion for diseases
+3. Crop yield estimate prediction
+4. News related to farming
+5. Live weather 
 
-This project is a starting point for a Flutter application.
+## Tech Stack Used
 
-A few resources to get you started if this is your first Flutter project:
+1. Flutter
+2. Firebase
+3. Flask
+4. Nodejs
+5. Heroku
+6. Tensorflow
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+This repository contains all files required for the app. Files related to training of crop yield prediction algorithm and deployed flask server can be found here:- https://github.com/jatinpandey02/Crop-Yield-API-Flask
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributors
+| Contributor       | Github            |
+| -                 | -                 |
+| Hemang Sinha | https://github.com/hemangdtu |
+| Garvit Kansal | https://github.com/helewrer3 |
+| Shubham Shrivastava | https://github.com/Shubham6013 |
+| Jatin Pandey | https://github.com/jatinpandey02 |
