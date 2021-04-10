@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vihaan_app/screens/add_product_screen.dart';
 import 'package:vihaan_app/screens/base_screen.dart';
 import 'package:vihaan_app/screens/login_screen.dart';
 import 'package:vihaan_app/screens/news_screen.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (ctx) => LoginScreen(),
         ToolsScreen.routeName: (ctx) => ToolsScreen(),
         NewsScreen.routeName: (ctx) => NewsScreen(),
-        WeatherScreen.routeName: (ctx) => WeatherScreen()
+        WeatherScreen.routeName: (ctx) => WeatherScreen(),
+        AddProductScreen.routeName: (ctx) => AddProductScreen()
       },
     );
   }
