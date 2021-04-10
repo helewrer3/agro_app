@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:vihaan_app/screens/disease_screen.dart';
+import 'package:vihaan_app/screens/marketplace_screen.dart';
 import 'package:vihaan_app/screens/news_screen.dart';
 import 'package:vihaan_app/screens/tools_screen.dart';
 import 'package:vihaan_app/screens/yield_screen.dart';
@@ -20,6 +21,7 @@ class _BaseScreenState extends State<BaseScreen> {
   final DiseasePrediction _diseasePredictionPage = DiseasePrediction();
   final NewsScreen _newsPage = NewsScreen();
   final YieldScreen _yieldPage = YieldScreen();
+  final MarketplaceScreen _marketplaceScreen = MarketplaceScreen();
 
   String _appBarText = "Tools";
   Color _appBarColor = Colors.green;
@@ -36,6 +38,8 @@ class _BaseScreenState extends State<BaseScreen> {
         return _yieldPage;
       case 3:
         return _newsPage;
+      case 4:
+        return _marketplaceScreen;
     }
   }
 
