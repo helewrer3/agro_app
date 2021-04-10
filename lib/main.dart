@@ -5,6 +5,7 @@ import 'package:vihaan_app/screens/news_screen.dart';
 import 'package:vihaan_app/screens/tools_screen.dart';
 import 'package:vihaan_app/screens/splash_screen.dart';
 import 'package:vihaan_app/screens/weather_screen.dart';
+import 'package:vihaan_app/screens/yield_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (ctx) => LoginScreen(),
         ToolsScreen.routeName: (ctx) => ToolsScreen(),
         NewsScreen.routeName: (ctx) => NewsScreen(),
-        WeatherScreen.routeName: (ctx) => WeatherScreen()
+        WeatherScreen.routeName: (ctx) => WeatherScreen(),
+        YieldScreen.routeName: (ctx) => YieldScreen(),
       },
     );
   }
