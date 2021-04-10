@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
 import 'package:flutter/services.dart';
-import 'cure.dart';
+import 'package:vihaan_app/meta/cure.dart';
 
 class DiseasePrediction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyApp(),
+      home: Container(child: MyApp()),
     );
   }
 }
@@ -124,7 +124,7 @@ class _MyAppState extends State<MyApp> {
     try {
       await Tflite.loadModel(
         model: "assets/model_unquant.tflite",
-        labels: "assets/labels.txt",
+        labels: "assets/label.txt",
       );
     } on PlatformException {
       print('Failed to load model.');
@@ -242,13 +242,6 @@ class _MyAppState extends State<MyApp> {
       body: Stack(
         children: stackChildren,
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     _showDialog(context);
-      //   },
-      //   tooltip: 'Pick Image',
-      //   child: Icon(Icons.camera),
-      // ),
     );
   }
 }

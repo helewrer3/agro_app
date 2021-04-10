@@ -1,4 +1,4 @@
-# plantdisease_app
+# vihaan_app
 
 A new Flutter project.
 
