@@ -4,7 +4,7 @@ import '../meta/global_vars.dart';
 
 class AddProductScreen extends StatelessWidget {
   static const routeName = '/add';
-  String title = '', price = '', desc = '', url = '';
+  String title = '', price = '', desc = '', url = '', num = '';
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -25,6 +25,12 @@ class AddProductScreen extends StatelessWidget {
                 onChanged: (val){price = '₹ $val';},
               ),
               TextFormField(
+                decoration: InputDecoration(labelText: 'Number'),
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                onChanged: (val){price = '$num';},
+              ),
+              TextFormField(
                 decoration: InputDecoration(labelText: 'Description'),
                 textInputAction: TextInputAction.next,
                 maxLines: 3,
@@ -39,7 +45,7 @@ class AddProductScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               RaisedButton(onPressed: (){
-                tempList.add(ProductCard(name: title, imageAddress: url, detail: desc, price: price,));
+                tempList.add(ProductCard(name: title, imageAddress: url, detail: desc, price: price, phoneUrl: num,));
                 Navigator.of(context).pop();
               }, child: Text('Save Form'))
             ],

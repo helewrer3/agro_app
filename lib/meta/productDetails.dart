@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class Sd extends StatelessWidget {
-  final img,nam,p,details;
+  final img,nam,p,phn,details;
   Sd({this.img,
   this.nam,
   this.p,
+  this.phn,
   this.details});
   @override
   Widget build(BuildContext context) {
@@ -71,24 +74,34 @@ class Sd extends StatelessWidget {
               ),
           ),
 
-          Card(
-            clipBehavior: Clip.antiAlias,
-            elevation: 22,
-            margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
-            child: ListTile(
-              leading: Icon(
-                Icons.phone,
-                color: Colors.black,
-              ),
-              title: Text(
-                'Contact Dealer',
-                 style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Source Sans Pro',
-                  fontSize: 20.0,
-                 ),
+          Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: InkWell(
+            child: Container(
+              
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                elevation: 22,
+                margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 30.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.phone,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'Contact Dealer',
+                     style: TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'Source Sans Pro',
+                      fontSize: 20.0,
+                     ),
+                  ),
+                ),
               ),
             ),
+           onTap: () => launch(phn),
+          ),
+          
           ),
           ],
         ),
