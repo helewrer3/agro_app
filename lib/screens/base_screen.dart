@@ -42,17 +42,19 @@ class _BaseScreenState extends State<BaseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBody: true,
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(_appBarText),
-        backgroundColor: _appBarColor,
-        centerTitle: true,
-        actions: [InkWell(onTap: null, child: _appBarAction)],
+    return SafeArea(
+      child: Scaffold(
+        extendBody: true,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(_appBarText),
+          backgroundColor: _appBarColor,
+          centerTitle: true,
+          actions: [InkWell(onTap: null, child: _appBarAction)],
+        ),
+        body: _showPage,
+        bottomNavigationBar: _bottomNavBar(),
       ),
-      body: _showPage,
-      bottomNavigationBar: _bottomNavBar(),
     );
   }
 

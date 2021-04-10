@@ -11,7 +11,7 @@ class DiseasePrediction extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyApp(),
+      home: Container(child: MyApp()),
     );
   }
 }
@@ -124,7 +124,7 @@ class _MyAppState extends State<MyApp> {
     try {
       await Tflite.loadModel(
         model: "assets/model_unquant.tflite",
-        labels: "assets/labels.txt",
+        labels: "assets/label.txt",
       );
     } on PlatformException {
       print('Failed to load model.');
