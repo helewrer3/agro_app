@@ -3,96 +3,65 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/parser.dart';
 
-class YieldScreen extends StatelessWidget {
-  static const routeName = '/yield';
+class YieldScreen extends StatefulWidget {
+  static const routeName = '/yield_add';
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Container(child: ScreenModel()),
-    );
-  }
+  _YieldScreenState createState() => _YieldScreenState();
 }
 
-class ScreenModel extends StatefulWidget {
-  @override
-  _ScreenModelState createState() => _ScreenModelState();
-}
-
-class _ScreenModelState extends State<ScreenModel> {
+class _YieldScreenState extends State<YieldScreen> {
   String cropYield;
+  double rainfall, temperature, pesticide;
+  String item;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: <Widget>[
-            Form(
-              child: formInterface(),
-            ),
-          ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          child: ListView(
+            children: [
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(hintText: 'Average Rainfall per Year'),
+                maxLength: 32,
+                onChanged: (String val) { rainfall = double.parse(val);},
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Air Temperature'),
+                keyboardType: TextInputType.number,
+                maxLength: 10,
+                onChanged: (String val) {temperature = double.parse(val);}
+              ),
+              TextFormField(
+                decoration: InputDecoration(hintText: 'Pesticide Tonnage'),
+                keyboardType: TextInputType.number,
+                maxLength: 10,
+                onChanged: (String val) {pesticide = double.parse(val);}
+              ),
+              TextFormField(
+                keyboardType: TextInputType.text,
+                decoration: InputDecoration(hintText: 'Crop'),
+                maxLength: 32,
+                onChanged: (String val) {item = val;},
+              ),
+              SizedBox(height: 15.0),
+              ElevatedButton(
+                onPressed: () async {
+                  print("Hello");
+                  await _sendToServer(rainfall, pesticide, temperature, item);
+                },
+                child: Text('Send'),
+              ),
+              SizedBox(height: 15.0),
+              (cropYield != null)? Align(child: Text('Expected Yield: $cropYield'), alignment: Alignment.center,) : Text(''),
+            ],
+          ),
         ),
-      )),
+      )
     );
   }
-
-  Widget formInterface() {
-    double rainfall, temperature, pesticide;
-    String item;
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(hintText: 'Average Rainfall per Year'),
-            maxLength: 32,
-            // validator: validateName,
-            onChanged: (String val) {
-              rainfall = double.parse(val);
-            },
-          ),
-          TextFormField(
-              decoration: InputDecoration(hintText: 'Air Temperature'),
-              keyboardType: TextInputType.number,
-              maxLength: 10,
-              // validator: validateMobile,
-              onChanged: (String val) {
-                temperature = double.parse(val);
-              }),
-          TextFormField(
-              decoration: InputDecoration(hintText: 'Pesticide Tonnage'),
-              keyboardType: TextInputType.number,
-              maxLength: 10,
-              // validator: validateEmail,
-              onChanged: (String val) {
-                pesticide = double.parse(val);
-              }),
-          TextFormField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(hintText: 'Crop'),
-            maxLength: 32,
-            // validator: validateName,
-            onChanged: (String val) {
-              item = val;
-            },
-          ),
-          SizedBox(height: 15.0),
-          ElevatedButton(
-            onPressed: () async {
-              print("Hello");
-              await _sendToServer(rainfall, pesticide, temperature, item);
-            },
-            child: Text('Send'),
-          ),
-          SizedBox(height: 15.0),
-          Text(cropYield ?? '')
-        ],
-      ),
-    );
-  }
-
+  
   Future<void> _sendToServer(double rainPar, double pestPar, double tempPar, String cropPar) async {
     //https://crop-yield-api.herokuapp.com/?rain=1083.0&temp=16.23&pest=75000.0&item=Cassava
     Uri url = Uri.parse("https://crop-yield-api.herokuapp.com/?rain=$rainPar&temp=$tempPar&pest=$pestPar&item=$cropPar");

@@ -25,14 +25,14 @@ class MainDrawer extends StatelessWidget {
               })
             ],
           ),
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                DrawerTile(title: 'Tools Section', route: ToolsScreen.routeName),
-                DrawerTile(title: 'News Section', route: NewsScreen.routeName)
-              ],
-            ),
-          )
+          // SingleChildScrollView(
+          //   child: Column(
+          //     children: [
+          //       DrawerTile(title: 'Tools Section', route: ToolsScreen.routeName),
+          //       DrawerTile(title: 'News Section', route: NewsScreen.routeName)
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );
