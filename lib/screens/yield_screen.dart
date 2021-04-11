@@ -54,7 +54,7 @@ class _YieldScreenState extends State<YieldScreen> {
                 child: Text('Send'),
               ),
               SizedBox(height: 15.0),
-              Align(child: Text('Expected Yield: $cropYield' ?? ''), alignment: Alignment.center,)
+              (cropYield != null)? Align(child: Text('Expected Yield: $cropYield'), alignment: Alignment.center,) : Text(''),
             ],
           ),
         ),
