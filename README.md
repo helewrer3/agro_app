@@ -34,6 +34,8 @@ We planned to implement five major features in ourapplication with the simplest 
 * Live Weather
   * As an additional feature we are also providing the user with the weather information in his/her region.
 
+![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png)
+
 ## Technologies Used
 | Technology        | Home Page         |
 | -                 | -                 |
