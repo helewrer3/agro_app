@@ -1,6 +1,6 @@
 # AGRO APP
 <p align="center">
-  <img src="https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png" width="200" height="200" />
+  <img width="200" height="200" src="https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png">
 </p>
 
 ### A One Stop Place for Farmers
