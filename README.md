@@ -1,8 +1,8 @@
 # AGRO APP 
 
-![image](https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png)
+![image](https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png =250x250)
 
-## A One Stop Place for Farmers
+### A One Stop Place for Farmers
 Traditionally farmers have used their perceptual sensorial systems to diagnose and monitor their crops health and needs. <br/>
 However, humans possess five basic perceptual systems with accuracy levels that can change from human to human which are largely dependent on the stress, experience, health and age.<br/>
 To overcome this problem, in the last decade, with the help of the emergence of smartphone technology, new agronomic applications were developed to reach better, cost-effective, more accurate and portable diagnosis systems.<br/> 
