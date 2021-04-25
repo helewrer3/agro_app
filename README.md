@@ -1,5 +1,7 @@
 # AGRO APP 
 
+![image](https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png | width=100)
+
 ## A One Stop Place for Farmers
 Traditionally farmers have used their perceptual sensorial systems to diagnose and monitor their crops health and needs. <br/>
 However, humans possess five basic perceptual systems with accuracy levels that can change from human to human which are largely dependent on the stress, experience, health and age.<br/>
