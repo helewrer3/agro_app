@@ -1,6 +1,6 @@
 # AGRO APP 
 
-![image](https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png | width=100)
+![image](https://github.com/helewrer3/vihaan_app/blob/garvit/assets/images/logo.png)
 
 ## A One Stop Place for Farmers
 Traditionally farmers have used their perceptual sensorial systems to diagnose and monitor their crops health and needs. <br/>
