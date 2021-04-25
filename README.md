@@ -35,10 +35,13 @@ We planned to implement five major features in ourapplication with the simplest 
   * As an additional feature we are also providing the user with the weather information in his/her region.
 
 ## Screnshots
-|        |         |
-| -                 | -                 |
-| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png) |
-| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png) |
+|                   |                   |                   |
+| -                 | -                 | -                 |
+| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121953.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121984.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618121997.png) |
+| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122018.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122022.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122067.png) |
+| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122090.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122102.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122112.png) |
+| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122120.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122124.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122269.png) |
+| ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122337.png) | ![image](https://github.com/helewrer3/vihaan_app/blob/garvit/screenshots/Screenshot_1618122904.png) |  |
 
 ## Technologies Used
 | Technology        | Home Page         |
