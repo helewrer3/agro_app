@@ -15,7 +15,7 @@ Files related to training of crop yield prediction algorithm and deployed flask 
 * User authentication and authorization using Auth0.
 * Marketplace, where farmers can buy and sell various products adding by them and others. 
 * Crop disease prediction and cure suggestion using TensorFlow lite model trained by Teachable Machine. 
-* Crop yield estimate predicion made using Python and Flask, deployed on Heroku.
+* Crop yield estimate prediction made using Python and Flask, deployed on Heroku.
 * Farming news provided by making custom API calls from [News API](https://newsapi.org/).
 * Live weather provided by [OpenWeather API](https://openweathermap.org/api) and geolocation.
 
