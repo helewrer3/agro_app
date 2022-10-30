@@ -1,39 +1,94 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:vihaan_app/widgets/news_card.dart';
+
+import 'package:agro_app/meta/constants.dart';
+import 'package:flutter/material.dart';
 
 class NewsScreen extends StatefulWidget {
-  static const routeName = '/news';
+  const NewsScreen({Key? key}) : super(key: key);
+
+  static const routeName = NEWS_ROUTE;
+
   @override
-  _NewsScreenState createState() => _NewsScreenState();
+  State<NewsScreen> createState() => _NewsScreenState();
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-  bool _isLoading = true;
-  List<dynamic> _data;
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero).then((_) async {
-      final url = Uri.parse('https://newsapi.org/v2/everything?q=farming&sortBy=publishedAt&apiKey=90dc7110ea6c4813a864710852ee0761');
-      var res = await http.get(url);
-      _data = json.decode(res.body)['articles'];
-      setState(() {
-        _isLoading = false;      
-      });
-    });
-  }
+  late bool _isLoading;
+  late List<dynamic> _data;
+
   @override
-  Widget build(BuildContext context) {
-    return _isLoading? Center(child: CircularProgressIndicator(),) : SafeArea(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          child: Column(
-            children: _data.map((e) => NewsCard(e)).toList(),
+  void initState() {
+    try {
+      setState(() {
+        _isLoading = true;
+      });
+      Future.delayed(Duration.zero).then((_) async {
+        var res =
+            await http.get(Uri.parse('$NEWS_PROVIDER&apiKey=$NEWS_SECRET'));
+        _data = json.decode(res.body)[ARTICLES];
+        setState(() {
+          _isLoading = false;
+        });
+        print(_data);
+      });
+    } catch (e) {
+      print(e);
+      setState(() {
+        _isLoading = false;
+      });
+    }
+    super.initState();
+  }
+
+  Widget newsCard(e) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0, right: 10.0, top: 4.0),
+      child: Card(
+        elevation: 10,
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  e[TITLE],
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(2.0),
+                  child: Divider(height: 10),
+                ),
+                Text(
+                  e[DESCRIPTION],
+                  style: const TextStyle(fontSize: 15),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          child: Column(
+            children: _data
+                .map((e) => newsCard(e)).toList(),
+          ),
+        ),
+      );
+    }
   }
 }

@@ -1,77 +1,57 @@
+import 'package:agro_app/meta/constants.dart';
+import 'package:agro_app/meta/global_vars.dart';
 import 'package:flutter/material.dart';
-import '../meta/global_vars.dart';
 
 class ToolsScreen extends StatelessWidget {
-  static const routeName = '/tools';
+  const ToolsScreen({Key? key}) : super(key: key);
+
+  static const routeName = TOOLS_ROUTE;
+
+  Widget barTab(name) {
+    return Tab(
+      child: Text(
+        name,
+        style: const TextStyle(
+          fontFamily: 'Varela',
+          fontSize: 18.0,
+        ),
+      ),
+    );
+  }
+
+  Widget tabView(list) {
+    return SingleChildScrollView(
+      child: Column(
+        children: list,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: Categories.values.length,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: appBarBackgroundColor[0],
+          backgroundColor: Colors.blueGrey,
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TabBar(
-                isScrollable: true,
-                indicatorColor: Colors.black,
-                unselectedLabelColor: Colors.white,
-                labelColor: Colors.black,
-                tabs: [
-                  BarTab(name: 'All'),
-                  for (int i = 0; i < 3; i++) BarTab(name: categories[i])
-                ],
-              ),
+                  isScrollable: true,
+                  indicatorColor: Colors.black,
+                  unselectedLabelColor: Colors.white,
+                  labelColor: Colors.black,
+                  tabs: Categories.values.map((e) => barTab(e.name)).toList()),
             ],
           ),
         ),
         body: TabBarView(
           children: [
-            TabView(list: tempList),
-            for (int i = 0; i < 3; i++)
-              TabView(
-                  list: tempList
-                      .where((element) => element.category == i)
-                      .toList())
+            tabView(demoList),
+            for (int i = 1; i < Categories.values.length; i++)
+              tabView(demoList.where((e) => e.category == i).toList())
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TabView extends StatelessWidget {
-  final List<Widget> list;
-  const TabView({
-    Key key,
-    this.list,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: list,
-        ),
-      ),
-    );
-  }
-}
-
-class BarTab extends StatelessWidget {
-  final String name;
-  const BarTab({Key key, this.name}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Tab(
-      child: Text(
-        name,
-        style: TextStyle(
-          fontFamily: 'Varela',
-          fontSize: 18.0,
         ),
       ),
     );

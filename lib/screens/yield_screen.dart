@@ -1,84 +1,118 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:agro_app/meta/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 
 class YieldScreen extends StatefulWidget {
-  static const routeName = '/yield_add';
+  const YieldScreen({Key? key}) : super(key: key);
+
+  static const routeName = YIELD_ROUTE;
+
   @override
-  _YieldScreenState createState() => _YieldScreenState();
+  State<YieldScreen> createState() => _YieldScreenState();
 }
 
 class _YieldScreenState extends State<YieldScreen> {
-  String cropYield;
-  double rainfall, temperature, pesticide;
-  String item;
+  late String _cropYield;
+  late String _item;
+  late double _rainfall, _temperature, _pesticide;
+  late bool _isLoading;
+
+  @override
+  void initState() {
+    setState(() {
+      _cropYield = NONE_TEXT;
+      _isLoading = false;
+    });
+    super.initState();
+  }
+
+  Future<void> _sendToServer() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      var pestPar = _pesticide * 150000;
+      Uri url = Uri.parse(
+          "$YIELD_PROVIDER/?rain=$_rainfall&temp=$_temperature&pest=$pestPar&item=$_item");
+      final response = await http.get(url);
+      var doc = parse(response.body).body;
+      setState(() {
+        _cropYield = 'Expected Yield: ${doc!.innerHtml} hg/ha';
+      });
+    } catch (e) {
+      print(e);
+      setState(() {
+        _cropYield = ERROR;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
         child: Form(
           child: ListView(
             children: [
               TextFormField(
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(hintText: 'Average Rainfall per Year'),
+                decoration:
+                    const InputDecoration(hintText: AVG_RAINFALL_YEARLY),
                 maxLength: 32,
                 onChanged: (String val) {
-                  rainfall = double.parse(val);
+                  _rainfall = double.parse(val);
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(hintText: 'Air Temperature'),
                 keyboardType: TextInputType.number,
+                decoration: const InputDecoration(hintText: AIR_TEMP),
                 maxLength: 10,
                 onChanged: (String val) {
-                  temperature = double.parse(val);
-                }
+                  _temperature = double.parse(val);
+                },
               ),
               TextFormField(
-                decoration: InputDecoration(hintText: 'Pesticide (kg/ha)'),
                 keyboardType: TextInputType.number,
+                decoration: const InputDecoration(hintText: PESTICIDE),
                 maxLength: 10,
                 onChanged: (String val) {
-                  pesticide = double.parse(val);
-                }
+                  _pesticide = double.parse(val);
+                },
               ),
               TextFormField(
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(hintText: 'Crop'),
+                decoration: const InputDecoration(hintText: CROP),
                 maxLength: 32,
                 onChanged: (String val) {
-                  item = val;
+                  _item = val;
                 },
               ),
-              SizedBox(height: 15.0),
-              ElevatedButton(
-                onPressed: () async {
-                  print("Hello");
-                  await _sendToServer(rainfall, pesticide, temperature, item);
-                },
-                child: Text('Send'),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: ElevatedButton(
+                  child: const Text(SEND),
+                  onPressed: () async {
+                    await _sendToServer();
+                  },
+                ),
               ),
-              SizedBox(height: 15.0),
-              (cropYield != null) ? Align(child: Text('Expected Yield: $cropYield hg/ha'), alignment: Alignment.center): Text(''),
+              _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : Align(
+                      alignment: Alignment.center,
+                      child: Text(_cropYield),
+                    )
             ],
           ),
         ),
-      )
+      ),
     );
-  }
-
-  Future<void> _sendToServer(
-      double rainPar, double pestPar, double tempPar, String cropPar) async {
-    pestPar = pestPar * 150000;
-    //https://crop-yield-api.herokuapp.com/?rain=1083.0&temp=16.23&pest=75000.0&item=Cassava
-    Uri url = Uri.parse("https://crop-yield-api.herokuapp.com/?rain=$rainPar&temp=$tempPar&pest=$pestPar&item=$cropPar");
-    final response = await http.get(url);
-    var doc = parse(response.body).body;
-    print(doc.innerHtml);
-    setState(() {
-      cropYield = doc.innerHtml;
-    });
   }
 }

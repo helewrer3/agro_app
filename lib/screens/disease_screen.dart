@@ -1,111 +1,24 @@
-import 'dart:async';
 import 'dart:io';
+
+import 'package:agro_app/meta/constants.dart';
+import 'package:agro_app/meta/global_vars.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
-import 'package:flutter/services.dart';
-import 'package:vihaan_app/meta/cure.dart';
 
-class DiseasePrediction extends StatelessWidget {
+class DiseaseScreen extends StatefulWidget {
+  const DiseaseScreen({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Container(child: MyApp()),
-    );
-  }
+  State<DiseaseScreen> createState() => _DiseaseScreenState();
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => new _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  File _image;
-  List _recognitions;
-  String diseaseName = "";
+class _DiseaseScreenState extends State<DiseaseScreen> {
+  late File? _image = null;
+  late List? _recognitions = null;
+  String _diseaseName = "";
   bool _busy = false;
-
-  Future _showDialog(BuildContext context) async {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("Select image source"),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  GestureDetector(
-                    child: Text("Gallery"),
-                    onTap: () {
-                      predictImagePickerGallery(context);
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                  ),
-                  GestureDetector(
-                    child: Text("Camera"),
-                    onTap: () {
-                      predictImagePickerCamera(context);
-                    },
-                  )
-                ],
-              ),
-            ),
-          );
-        });
-  }
-
-  Future<void> predictImagePickerGallery(BuildContext context) async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-    setState(() {
-      _busy = true;
-      _image = image;
-    });
-    Navigator.of(context).pop();
-    recognizeImage(image);
-  }
-
-  Future<void> predictImagePickerCamera(BuildContext context) async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    if (image == null) return;
-    setState(() {
-      _busy = true;
-      _image = image;
-    });
-    Navigator.of(context).pop();
-    recognizeImage(image);
-  }
-
-  final disease = {
-    "Apple - Apple Scab":
-        "Choose resistant varieties when possible. Rake under trees and destroy infected leaves to reduce the number of fungal spores available to start the disease cycle over again next spring. Water in the evening or early morning hours (avoid overhead irrigation) to give the leaves time to dry out before infection can occur.",
-    "Apple - Black Rot":
-        "Fungicides like copper-based sprays and lime sulfur, can be used to control black rot.",
-    "Apple - Apple Cedar Rust":
-        "Remove galls from infected junipers. In some cases, juniper plants should be removed entirely. Apply preventative, disease-fighting fungicides labeled for use on apples weekly, starting with bud break, to protect trees from spores being released by the juniper host.",
-    "Cherry - Powdery Mildew":
-        "keep irrigation water off developing fruit and leaves by using irrigation that does not wet the leaves. Also, keep irrigation sets as short as possible. Follow cultural practices that promote good air circulation, such as pruning, and moderate shoot growth through judicious nitrogen management.",
-    "Grape - Black Measles":
-        "Lime sulfur sprays can manage the trio of pathogens that cause black measles.",
-    "Grape - Leaf Blight":
-        "Fungicides sprayed for other diseases in the season may help to reduce this disease.",
-    "Potato - Early Blight":
-        "Avoid overhead irrigation. Do not dig tubers until they are fully mature in order to prevent damage. Do not use a field for potatoes that was used for potatoes or tomatoes the previous year.",
-    "Potato - Late Blight":
-        "Fungicides are available for management of late blight on potato.",
-    "Tomato - Spider Mite":
-        "A natural way to kill spider mites on your plants is to mix one part rubbing alcohol with one part water, then spray the leaves. The alcohol will kill the mites without harming the plants. Another natural solution to get rid of these tiny pests is to use liquid dish soap.",
-    "Tomato - Curl Virus":
-        "Treatment for this disease include insecticides, hybrid seeds, and growing tomatoes under greenhouse conditions.",
-    "Tomato - Leaf Mold":
-        "By adequating row and plant spacing that promote better air circulation through the canopy reducing the humidity; preventing excessive nitrogen on fertilization since nitrogen out of balance enhances foliage disease development.",
-    "Strawberry - Leaf Scorch":
-        "Remove foliage and crop residues after picking or at renovation to remove inoculum and delay disease increase in late summer and fall. Fungicide treatments are effective during the flowering period, and during late summer and fall.",
-  };
 
   @override
   void initState() {
@@ -113,26 +26,26 @@ class _MyAppState extends State<MyApp> {
 
     _busy = true;
 
-    loadModel().then((val) {
+    _loadModel().then((val) {
       setState(() {
         _busy = false;
       });
     });
   }
 
-  Future loadModel() async {
+  Future _loadModel() async {
     try {
       await Tflite.loadModel(
         model: "assets/model_unquant.tflite",
         labels: "assets/label.txt",
       );
     } on PlatformException {
-      print('Failed to load model.');
+      print(ERROR);
     }
   }
 
-  Future recognizeImage(File image) async {
-    var recognitions = await Tflite.runModelOnImage(
+  Future _recognizeImage(File image) async {
+    List? recognitions = await Tflite.runModelOnImage(
       path: image.path,
       numResults: 6,
       threshold: 0.05,
@@ -145,10 +58,59 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  handleCure() {
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => Cure(diseaseName),
-    ));
+  Future<void> _predictImagePickerCamera(BuildContext context) async {
+    XFile? tempImage =
+        (await ImagePicker().pickImage(source: ImageSource.camera));
+    if (tempImage == null) {
+      return;
+    } else {
+      setState(() {
+        _busy = true;
+        _image = File(tempImage.path);
+      });
+      Navigator.of(context).pop();
+      _recognizeImage(File(tempImage.path));
+    }
+  }
+
+  Future<void> _predictImagePickerGallery(BuildContext context) async {
+    XFile? tempImage =
+        (await ImagePicker().pickImage(source: ImageSource.gallery));
+    if (tempImage == null) {
+      return;
+    } else {
+      setState(() {
+        _busy = true;
+        _image = File(tempImage.path);
+      });
+      Navigator.of(context).pop();
+      _recognizeImage(File(tempImage.path));
+    }
+  }
+
+  Future _showDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text(SELECT_IMAGE_SOURCE),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  GestureDetector(
+                      child: const Text(GALLERY),
+                      onTap: () => _predictImagePickerGallery(context)),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                  ),
+                  GestureDetector(
+                      child: const Text(CAMERA),
+                      onTap: () => _predictImagePickerCamera(context))
+                ],
+              ),
+            ),
+          );
+        });
   }
 
   @override
@@ -161,20 +123,20 @@ class _MyAppState extends State<MyApp> {
       left: 0.0,
       width: size.width,
       child: _image == null
-          ? Container(
+          ? SizedBox(
               height: size.height - 50,
               child: Center(
                 child: ElevatedButton(
                     onPressed: () {
                       _showDialog(context);
                     },
-                    child: Text("Add Image")),
+                    child: const Text("Add Image")),
               ),
             )
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.file(
-                _image,
+                _image!,
                 height: MediaQuery.of(context).size.height / 2,
                 fit: BoxFit.cover,
               ),
@@ -187,61 +149,42 @@ class _MyAppState extends State<MyApp> {
         padding: const EdgeInsets.only(left: 8.0),
         child: Column(
           children: _recognitions != null
-              ? _recognitions.map((res) {
-                  diseaseName = res['label'];
+              ? _recognitions!.map((res) {
+                  _diseaseName = res['label'];
                   return Text(
                     "Disease Name : ${res["label"]}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20.0,
-                        fontWeight: FontWeight.bold
-                        // background: Paint()..color = Colors.white,
-                        ),
+                        fontWeight: FontWeight.bold),
                   );
-                }).toList()
+                }).toList().sublist(0, 1)
               : [],
         ),
       ),
     ));
 
     if (_image != null) {
-      stackChildren.add(
-        Positioned(
-          right: 0,
-          left: 0,
-          top: MediaQuery.of(context).size.height / 1.80,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Cure : ",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(disease[diseaseName]),
-              ],
-            ),
-          ),
-        ),
-      );
+      stackChildren.add(Positioned(
+        right: 0,
+        left: 0,
+        top: MediaQuery.of(context).size.height / 1.80,
+        child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Text("Cure\n${demoDiseases[_diseaseName]}")),
+      ));
     }
 
     if (_busy) {
       stackChildren.add(const Opacity(
-        child: ModalBarrier(dismissible: false, color: Colors.grey),
         opacity: 0.3,
+        child: ModalBarrier(dismissible: false, color: Colors.grey),
       ));
       stackChildren.add(const Center(child: CircularProgressIndicator()));
     }
 
-    return Scaffold(
-      body: Stack(
-        children: stackChildren,
-      ),
+    return Stack(
+      children: stackChildren,
     );
   }
 }

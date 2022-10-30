@@ -26,7 +26,7 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -38,13 +38,13 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.auth0.flutterdemo"
+        applicationId "com.helewrer3.agro_app"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
-        manifestPlaceholders = [
-            'appAuthRedirectScheme': 'com.auth0.flutterdemo'
+        manifestPlaceholders += [
+                'appAuthRedirectScheme': 'com.helewrer3.agroapp',
         ]
     }
 

@@ -1,97 +1,87 @@
-import 'dart:convert';
-import 'package:vihaan_app/screens/base_screen.dart';
-
-import '../meta/global_vars.dart';
+import 'package:agro_app/meta/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_appauth/flutter_appauth.dart';
-import 'package:vihaan_app/screens/tools_screen.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:agro_app/services/auth_service.dart';
 
-final FlutterAppAuth appAuth = FlutterAppAuth();
-const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+import 'base_screen.dart';
+
 
 class LoginScreen extends StatefulWidget {
-  static const routeName = '/login';
+  const LoginScreen({Key? key}) : super(key: key);
+
+  static const routeName = LOGIN_ROUTE;
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false, _isFailed = false;
-  String _error;
+  late String _error;
 
-  Future<Map<String, Object>> getUserDetails(String accessToken) async {
-    const String url = '$AUTH0_ISSUER/userinfo';
-    final http.Response response = await http.get(url,
-      headers: <String, String>{'Authorization': 'Bearer $accessToken'},
-    );
-
-    if (response.statusCode == 200) return jsonDecode(response.body);
-    else throw Exception('Failed to get user details');
-  }
-
-  Future<void> loginAction() async {
+  Future<void> _loginAction() async {
     try {
       setState(() {
         _isLoading = true;
-        _isFailed = false; 
-        _error = '';     
+        _isFailed = false;
+        _error = NONE_TEXT;
       });
-      final AuthorizationTokenResponse result = await appAuth.authorizeAndExchangeCode(
-        AuthorizationTokenRequest(
-          AUTH0_CLIENT_ID,
-          AUTH0_REDIRECT_URI,
-          issuer: 'https://$AUTH0_DOMAIN',
-          scopes: <String>['openid', 'profile', 'offline_access'],
-          promptValues: ['login']
-        ),
-      );
-      final Map<String, Object> profile = await getUserDetails(result.accessToken);
-      await secureStorage.write(key: 'refresh_token', value: result.refreshToken);
-      await secureStorage.write(key: 'name', value: profile['nickname']);
-      await secureStorage.write(key: 'picture', value: profile['picture']);
-      global_name = profile['nickname'];
-      global_imageUrl = profile['picture'];
+
+      var profile = await AuthService.instance.getUserDetails();
+
+      await AuthService.instance.writeSecureStorage(profile);
+
       setState(() {
         _isLoading = _isFailed = false;
-        _error = '';
+        _error = NONE_TEXT;
       });
       Navigator.of(context).pushReplacementNamed(BaseScreen.routeName);
     } catch (e) {
       print(e);
       setState(() {
         _isLoading = false;
-        _isFailed = true; 
-        _error = e.toString();
+        _isFailed = true;
+        _error = ERROR;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if(_isLoading) return Center(child: CircularProgressIndicator());
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Container(child: Image.asset('assets/images/logo.png'), width: 200),
-        Text('AGRO APP',
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            decoration: TextDecoration.none
+    if (_isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(width: 200, child: Image.asset(LOGO_URL)),
+          const Text(
+            'AGRO APP',
+            style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                decoration: TextDecoration.none),
           ),
-        ),
-        SizedBox(height: 20),
-        RaisedButton(
-          onPressed: () async {
-            await loginAction();
-          },
-          child: const Text('Login'),
-        ),
-        (_isFailed)? Text(_error): Text(''),
-      ],
-    );
+          const SizedBox(height: 20),
+          TextButton(
+            onPressed: () async {
+              await _loginAction();
+            },
+            child: const Text(LOGIN),
+          ),
+          SizedBox(
+              width: 200,
+              height: 200,
+              child: (_isFailed)
+                  ? Text(
+                      _error,
+                      softWrap: true,
+                      style: const TextStyle(
+                          fontSize: 10, decoration: TextDecoration.none),
+                    )
+                  : const Text(NONE_TEXT)),
+        ],
+      );
+    }
   }
 }

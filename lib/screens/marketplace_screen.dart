@@ -1,19 +1,19 @@
+import 'package:agro_app/meta/global_vars.dart';
 import 'package:flutter/material.dart';
-import '../meta/global_vars.dart';
 
 class MarketplaceScreen extends StatefulWidget {
+  const MarketplaceScreen({Key? key}) : super(key: key);
+
   @override
-  _MarketplaceScreenState createState() => _MarketplaceScreenState();
+  State<MarketplaceScreen> createState() => _MarketplaceScreenState();
 }
 
 class _MarketplaceScreenState extends State<MarketplaceScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Column(
-          children: tempList,
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        children: demoList,
       ),
     );
   }

@@ -1,93 +1,114 @@
+import 'package:agro_app/meta/constants.dart';
+import 'package:agro_app/screens/add_product_screen.dart';
+import 'package:agro_app/utils/product_card.dart';
 import 'package:flutter/material.dart';
-import 'package:vihaan_app/screens/add_product_screen.dart';
-import 'package:vihaan_app/screens/weather_screen.dart';
-import 'package:vihaan_app/widgets/product_card.dart';
 
-const String AUTH0_DOMAIN = 'dev-ji6lcyp5.us.auth0.com';
-const String AUTH0_CLIENT_ID = 'hRVLCCU6V7SH4SH4ZuAkRzV2NaM0jPyI';
-const String AUTH0_REDIRECT_URI = 'com.auth0.flutterdemo://login-callback';
-const String AUTH0_ISSUER = 'https://$AUTH0_DOMAIN';
-const String WEATHER_KEY = 'ad6ba04780c2603bc57a9fd63df4c745';
-String global_name = '';
-String global_imageUrl = '';
+import '../screens/weather_screen.dart';
 
-var appBarTitleText = {
-  0: "Tools",
-  1: "Disease Prediction",
-  2: "Yield Prediction",
-  3: "News",
-  4: "Marketplace",
+String? globalName, globalImageUrl;
+var screenMeta = {
+  0: {
+    TITLE: TOOLS,
+    NAVBAR_NAME: TOOLS,
+    NAVBAR_ICON: Icons.build,
+    APPBAR_COLOR: Colors.green,
+    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+      return const Text(NONE_TEXT);
+    }
+  },
+  1: {
+    TITLE: DISEASE_PREDICTION,
+    NAVBAR_NAME: DISEASE,
+    NAVBAR_ICON: Icons.coronavirus_outlined,
+    APPBAR_COLOR: Colors.red,
+    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+      return const IconButton(icon: Icon(Icons.add_a_photo), onPressed: null);
+    },
+  },
+  2: {
+    TITLE: YIELD_PREDICTION,
+    NAVBAR_NAME: YIELD,
+    NAVBAR_ICON: Icons.spa,
+    APPBAR_COLOR: Colors.purple,
+    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+      return const Text(NONE_TEXT);
+    },
+  },
+  3: {
+    TITLE: NEWS,
+    NAVBAR_NAME: NEWS,
+    APPBAR_COLOR: Colors.black,
+    NAVBAR_ICON: Icons.book,
+    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+      return IconButton(
+          icon: const Icon(Icons.cloud),
+          onPressed: () {
+            Navigator.of(ctx).pushNamed(WeatherScreen.routeName);
+          });
+    },
+  },
+  4: {
+    TITLE: MARKETPLACE,
+    NAVBAR_NAME: MARKETPLACE,
+    NAVBAR_ICON: Icons.store,
+    APPBAR_COLOR: Colors.yellow,
+    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+      return IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(ctx).pushNamed(AddProductScreen.routeName);
+          });
+    },
+  },
 };
 
-var appBarBackgroundColor = {
-  0: Colors.green,
-  1: Colors.red,
-  2: Colors.purple,
-  3: Colors.black,
-  4: Colors.deepPurple,
-};
-
-var navBarIcons = {
-  0: Icons.build,
-  1: Icons.coronavirus_outlined,
-  2: Icons.spa,
-  3: Icons.book,
-  4: Icons.store,
-};
-
-var navBarTitle = {
-  0: "Tools",
-  1: "Disease",
-  2: "Yield",
-  3: "News",
-  4: "Marketplace",
-};
-
-Map<int, Function> appBarActiveActionWidget = {
-  0: (BuildContext ctx){return Text('');},
-  1: (BuildContext ctx){return IconButton(icon: Icon(Icons.add_a_photo), onPressed: null);},
-  2: (BuildContext ctx){return Text('');},
-  3: (BuildContext ctx){return IconButton(icon: Icon(Icons.cloud), onPressed: (){Navigator.of(ctx).pushNamed(WeatherScreen.routeName);});},
-  4: (BuildContext ctx){return IconButton(icon: Icon(Icons.add), onPressed: (){Navigator.of(ctx).pushNamed(AddProductScreen.routeName);});},
-};
-
-Map<int, String> categories = {
-  0: 'Fertilizers',
-  1: 'Insecticides',
-  2: 'Pesticides'
-};
-
-List<ProductCard> tempList = [
+var demoList = <ProductCard>[
   ProductCard(
-    name: "Alagaezyme Pure Neem Oil\nfor Plant pesticides pest\nControl (250ml)",
+    name:
+        "Alagaezyme Pure Neem Oil\nfor Plant pesticides pest\nControl (250ml)",
     price: "₹ 239.00",
-    imageAddress: 'https://m.media-amazon.com/images/I/71dRYM4NxzL._AC_UL320_.jpg',
-    phoneUrl: "tel:21213123123",
-    detail: " Neem oil kills some pests like whitefly, aphids, Japanese beetles, moth larvae, scale, and spider mites. Neem oil are also used as fungicides against rust, black spot, mildew, leaf spot, scab, anthracnose, blight, and botrytis. Besides being an organic insecticide, using this product allows you to target pests specifically as opposed to beneficial insects such as bees and lady beetles(bees and lady beetles do not eat plant leaves).Take 4-6 ml of this concentrated Neem oil in 1 litter of water and stirr well to get its emulsified form.",
-    category: 2,
-  ),
-  ProductCard(
-    name: "T R Agro Neem\nOil, Organic Insecticide for\nGardening and Farming\n50mL",
-    price: "₹ 110.00",
-    imageAddress: 'https://images-na.ssl-images-amazon.com/images/I/413mz9plbHL.jpg',
-    phoneUrl: "tel:21213123123",
-    detail: "It increases growth and development of plants Preventing damage by insects and diseases environmental Better Growths for Plants Neem Kawach reduces risk of Plant failure It can be used in agricultural fields, household gardens, infected Plants Trees",
-    category: 1,
-  ),
-  ProductCard(
-    name: "Neem Oil For Spray- a\nnatural ferilizer and \npesticide for plants - \n1000mL",
-    price: "₹ 199.00",
-    imageAddress: 'https://m.media-amazon.com/images/I/51BRS0h-CJL._AC_SR160,160_.jpg',
-    phoneUrl: "tel:21213123123",
-    detail: "100 % natural and organic water soluble neem oil, available in pouch of 200 ml Dual purpose in the vegetable garden as both a pesticide and a fungicide. It can safely be used on food, leaves no dangerous residue in the soil and effectively reduces or kills pests Can be used as a beauty supplement and helps reduce redness and inflammation. It is an herbal insecticide used in agricultural sprayers, farming and gardening",
-    category: 0,
+    imgAddr: 'https://m.media-amazon.com/images/I/71dRYM4NxzL._AC_UL320_.jpg',
+    phnUrl: "tel:21213123123",
+    detail:
+        " Neem oil kills some pests like whitefly, aphids, Japanese beetles, moth larvae, scale, and spider mites. Neem oil are also used as fungicides against rust, black spot, mildew, leaf spot, scab, anthracnose, blight, and botrytis. Besides being an organic insecticide, using this product allows you to target pests specifically as opposed to beneficial insects such as bees and lady beetles(bees and lady beetles do not eat plant leaves).Take 4-6 ml of this concentrated Neem oil in 1 litter of water and stirr well to get its emulsified form.",
+    category: Categories.fertilizers.index,
   ),
 ];
 
-var appBarActiveActionTask = {
-  0: null,
-  1: null,
-  2: null,
-  3: null,
-  4: null,
+var demoDiseases = {
+  "Apple - Apple Scab":
+      "Choose resistant varieties when possible. Rake under trees and destroy infected leaves to reduce the number of fungal spores available to start the disease cycle over again next spring. Water in the evening or early morning hours (avoid overhead irrigation) to give the leaves time to dry out before infection can occur.",
+  "Apple - Black Rot":
+      "Fungicides like copper-based sprays and lime sulfur, can be used to control black rot.",
+  "Apple - Apple Cedar Rust":
+      "Remove galls from infected junipers. In some cases, juniper plants should be removed entirely. Apply preventative, disease-fighting fungicides labeled for use on apples weekly, starting with bud break, to protect trees from spores being released by the juniper host.",
+  "Cherry - Powdery Mildew":
+      "keep irrigation water off developing fruit and leaves by using irrigation that does not wet the leaves. Also, keep irrigation sets as short as possible. Follow cultural practices that promote good air circulation, such as pruning, and moderate shoot growth through judicious nitrogen management.",
+  "Grape - Black Measles":
+      "Lime sulfur sprays can manage the trio of pathogens that cause black measles.",
+  "Grape - Leaf Blight":
+      "Fungicides sprayed for other diseases in the season may help to reduce this disease.",
+  "Potato - Early Blight":
+      "Avoid overhead irrigation. Do not dig tubers until they are fully mature in order to prevent damage. Do not use a field for potatoes that was used for potatoes or tomatoes the previous year.",
+  "Potato - Late Blight":
+      "Fungicides are available for management of late blight on potato.",
+  "Tomato - Spider Mite":
+      "A natural way to kill spider mites on your plants is to mix one part rubbing alcohol with one part water, then spray the leaves. The alcohol will kill the mites without harming the plants. Another natural solution to get rid of these tiny pests is to use liquid dish soap.",
+  "Tomato - Curl Virus":
+      "Treatment for this disease include insecticides, hybrid seeds, and growing tomatoes under greenhouse conditions.",
+  "Tomato - Leaf Mold":
+      "By adequating row and plant spacing that promote better air circulation through the canopy reducing the humidity; preventing excessive nitrogen on fertilization since nitrogen out of balance enhances foliage disease development.",
+  "Strawberry - Leaf Scorch":
+      "Remove foliage and crop residues after picking or at renovation to remove inoculum and delay disease increase in late summer and fall. Fungicide treatments are effective during the flowering period, and during late summer and fall.",
 };
+
+enum Categories {
+  all(ALL),
+  fertilizers(FERTILIZERS),
+  pesticides(PESTICIDES),
+  insecticides(INSECTICIDES);
+
+  const Categories(this.name);
+
+  final String name;
+}

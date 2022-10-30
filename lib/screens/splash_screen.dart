@@ -1,29 +1,35 @@
+import 'package:agro_app/meta/constants.dart';
+import 'package:agro_app/screens/base_screen.dart';
+import 'package:agro_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:vihaan_app/meta/global_vars.dart';
-import 'package:vihaan_app/screens/base_screen.dart';
-import 'package:vihaan_app/screens/login_screen.dart';
-const FlutterSecureStorage secureStorage = FlutterSecureStorage();
+
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  static const routeName = '/';
+  const SplashScreen({super.key});
+
+  static const routeName = SPLASH_ROUTE;
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String _storedRefreshToken;
-  bool _isLoading;
+  late bool _isLoading;
+  late bool _isRefreshTokenNotNUll;
 
   @override
   void initState() {
     _isLoading = true;
-    Future.delayed(Duration.zero).then((value) async {
-      _storedRefreshToken = await secureStorage.read(key: 'refresh_token');
-      global_name = await secureStorage.read(key: 'name');
-      global_imageUrl = await secureStorage.read(key: 'picture');
-      if(_storedRefreshToken != null) Navigator.of(context).pushReplacementNamed(BaseScreen.routeName);
-      else Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
+      await AuthService.instance.readSecureStorage();
+      _isRefreshTokenNotNUll = await AuthService.instance.isRefreshKeyNotNull();
+    }).then((value) {
+      if (_isRefreshTokenNotNUll) {
+        Navigator.of(context).pushReplacementNamed(BaseScreen.routeName);
+      } else {
+        Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+      }
       setState(() {
         _isLoading = false;
       });
@@ -33,7 +39,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(_isLoading) return Center(child: Container(child: CircularProgressIndicator()));
-    else return Container(child: null);
+    if (_isLoading) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Image(
+              image: AssetImage(LOGO_URL),
+              height: 200,
+              width: 200,
+            ),
+            CircularProgressIndicator()
+          ],
+        ),
+      );
+    } else {
+      return Container(child: null);
+    }
   }
 }
