@@ -33,7 +33,7 @@ class _BaseScreenState extends State<BaseScreen> {
     _screenList = [
       const ToolsScreen(),
       const DiseaseScreen(),
-      const YieldScreen(),
+      // const YieldScreen(),
       const NewsScreen(),
       const MarketplaceScreen()
     ];

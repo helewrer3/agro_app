@@ -25,16 +25,16 @@ var screenMeta = {
       return const IconButton(icon: Icon(Icons.add_a_photo), onPressed: null);
     },
   },
+  // 2: {
+  //   TITLE: YIELD_PREDICTION,
+  //   NAVBAR_NAME: YIELD,
+  //   NAVBAR_ICON: Icons.spa,
+  //   APPBAR_COLOR: Colors.purple,
+  //   APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
+  //     return const Text(NONE_TEXT);
+  //   },
+  // },
   2: {
-    TITLE: YIELD_PREDICTION,
-    NAVBAR_NAME: YIELD,
-    NAVBAR_ICON: Icons.spa,
-    APPBAR_COLOR: Colors.purple,
-    APPBAR_ACTIVE_ACTION_WIDGET: (BuildContext ctx) {
-      return const Text(NONE_TEXT);
-    },
-  },
-  3: {
     TITLE: NEWS,
     NAVBAR_NAME: NEWS,
     APPBAR_COLOR: Colors.black,
@@ -47,7 +47,7 @@ var screenMeta = {
           });
     },
   },
-  4: {
+  3: {
     TITLE: MARKETPLACE,
     NAVBAR_NAME: MARKETPLACE,
     NAVBAR_ICON: Icons.store,

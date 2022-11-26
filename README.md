@@ -62,4 +62,3 @@ We planned to implement five major features in ourapplication with the simplest 
 | Garvit Kansal | https://github.com/helewrer3 |
 | Hemang Sinha | https://github.com/hemangdtu |
 | Jatin Pandey | https://github.com/jatinpandey02 |
-| Shubham Shrivastava | https://github.com/Shubham6013 |

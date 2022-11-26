@@ -6,7 +6,7 @@ import 'package:agro_app/screens/news_screen.dart';
 import 'package:agro_app/screens/splash_screen.dart';
 import 'package:agro_app/screens/tools_screen.dart';
 import 'package:agro_app/screens/weather_screen.dart';
-import 'package:agro_app/screens/yield_screen.dart';
+// import 'package:agro_app/screens/yield_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         NewsScreen.routeName: (ctx) => const NewsScreen(),
         WeatherScreen.routeName: (ctx) => const WeatherScreen(),
         ToolsScreen.routeName: (ctx) => const ToolsScreen(),
-        YieldScreen.routeName: (ctx) => const YieldScreen(),
+        // YieldScreen.routeName: (ctx) => const YieldScreen(),
         AddProductScreen.routeName: (ctx) => AddProductScreen()
       },
     );

@@ -47,7 +47,7 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
   Future _recognizeImage(File image) async {
     List? recognitions = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 6,
+      numResults: 1,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
@@ -60,7 +60,7 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
 
   Future<void> _predictImagePickerCamera(BuildContext context) async {
     XFile? tempImage =
-        (await ImagePicker().pickImage(source: ImageSource.camera));
+        (await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 256, maxWidth: 256));
     if (tempImage == null) {
       return;
     } else {
@@ -75,7 +75,7 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
 
   Future<void> _predictImagePickerGallery(BuildContext context) async {
     XFile? tempImage =
-        (await ImagePicker().pickImage(source: ImageSource.gallery));
+        (await ImagePicker().pickImage(source: ImageSource.gallery,  maxHeight: 256, maxWidth: 256));
     if (tempImage == null) {
       return;
     } else {
@@ -164,16 +164,16 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
       ),
     ));
 
-    if (_image != null) {
-      stackChildren.add(Positioned(
-        right: 0,
-        left: 0,
-        top: MediaQuery.of(context).size.height / 1.80,
-        child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: Text("Cure\n${demoDiseases[_diseaseName]}")),
-      ));
-    }
+    // if (_image != null) {
+    //   stackChildren.add(Positioned(
+    //     right: 0,
+    //     left: 0,
+    //     top: MediaQuery.of(context).size.height / 1.80,
+    //     child: Padding(
+    //         padding: const EdgeInsets.all(10),
+    //         child: Text("Cure\n${demoDiseases[_diseaseName]}")),
+    //   ));
+    // }
 
     if (_busy) {
       stackChildren.add(const Opacity(

@@ -3,7 +3,7 @@ const AUTH0_DOMAIN = 'dev-ji6lcyp5.us.auth0.com';
 const AUTH0_CLIENT_ID = '9GsSRSrFDAWS4V61J0GTQuZqPeuD2HLQ';
 const BUNDLE_IDENTIFIER = 'com.helewrer3.agroapp';
 const WEATHER_SECRET = 'ad6ba04780c2603bc57a9fd63df4c745';
-const NEWS_SECRET = '90dc7110ea6c4813a864710852ee0761';
+const NEWS_SECRET = '8dOvZtHaiLJfJJWhCUvMgr4gQvRLcJ5G9OC8TK8HMYA';
 
 //Auth URLs
 const AUTH0_ISSUER = 'https://$AUTH0_DOMAIN';
@@ -11,7 +11,7 @@ const AUTH0_REDIRECT_URI = '$BUNDLE_IDENTIFIER://login-callback';
 
 //News URLs
 const NEWS_PROVIDER =
-    'https://newsapi.org/v2/everything?q=farming&sortBy=publishedAt&language=en';
+    'https://api.newscatcherapi.com/v2/search?q=agriculture&countries=IN&page_size=100';
 
 //Weather URLs
 const WEATHER_PROVIDER = 'https://openweathermap.org';
@@ -50,7 +50,8 @@ const YIELD = 'Yield';
 const NEWS = 'News';
 const MARKETPLACE = 'Marketplace';
 const ARTICLES = 'articles';
-const DESCRIPTION = 'description';
+const DESCRIPTION = 'excerpt';
+const LINK = 'link';
 const WEATHER = 'Weather';
 const LOCATION_SERVICES_DISABLED = 'Location services are disabled.';
 const LOCATION_PERMISSION_DEINED_FOREVER =
