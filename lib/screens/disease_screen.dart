@@ -47,11 +47,12 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
   Future _recognizeImage(File image) async {
     List? recognitions = await Tflite.runModelOnImage(
       path: image.path,
-      numResults: 1,
+      numResults: 38,
       threshold: 0.05,
       imageMean: 127.5,
       imageStd: 127.5,
     );
+    print(recognitions);
     setState(() {
       _busy = false;
       _recognitions = recognitions;
@@ -60,7 +61,7 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
 
   Future<void> _predictImagePickerCamera(BuildContext context) async {
     XFile? tempImage =
-        (await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 256, maxWidth: 256));
+        (await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 256, maxHeight: 256));
     if (tempImage == null) {
       return;
     } else {
@@ -75,7 +76,7 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
 
   Future<void> _predictImagePickerGallery(BuildContext context) async {
     XFile? tempImage =
-        (await ImagePicker().pickImage(source: ImageSource.gallery,  maxHeight: 256, maxWidth: 256));
+        (await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 256, maxHeight: 256));
     if (tempImage == null) {
       return;
     } else {
@@ -152,9 +153,8 @@ class _DiseaseScreenState extends State<DiseaseScreen> {
               ? _recognitions!.map((res) {
                   _diseaseName = res['label'];
                   return Text(
-                    "Disease Name : ${res["label"]}",
+                    "Disease Name : \n${res["label"]}",
                     style: const TextStyle(
-                        color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold),
                   );

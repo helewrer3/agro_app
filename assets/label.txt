@@ -1,38 +1,38 @@
 Apple - Apple Scab
 Apple - Black Rot
 Apple - Apple Cedar Rust
-Cherry - Powdery Mildew
+Apple - Healthy
+Blueberry - Healthy
+Cherry (including sour) - Powdery Mildew
+Cherry (including sour) - Healthy
+Corn (maize) - Cercospora Leaf Spot
+Corn (maize) - Common Rust
+Corn (maize) - Northern Leaf Blight
+Corn (maize) - Healthy
+Grape - Black Rot
 Grape - Black Measles
-Grape - Leaf Blight
+Grape - Healthy
+Grape - Isariopsis Leaf Spot
+Orange - Citrus Greening
+Peach - Bacterial Spot
+Peach - Healthy
+Pepper Bell - Bacterial Spot
+Pepper Bell - Healthy
 Potato - Early Blight
 Potato - Late Blight
-Tomato - Curl Virus
-Tomato - Spider Mite
-Tomato - Leaf Mold
+Potato - Healthy
+Raspberry - Healthy
+Soybean - Healthy
+Squash - Powdery Mildew
 Strawberry - Leaf Scorch
-Apple - Apple Scab
-Apple - Black Rot
-Apple - Apple Cedar Rust
-Cherry - Powdery Mildew
-Grape - Black Measles
-Grape - Leaf Blight
-Potato - Early Blight
-Potato - Late Blight
-Tomato - Curl Virus
-Tomato - Spider Mite
+Strawberry - Healthy
+Tomato - Bacterial spot
+Tomato - Early Blight
+Tomato - Late Blight
 Tomato - Leaf Mold
-Strawberry - Leaf Scorch
-Apple - Apple Scab
-Apple - Black Rot
-Apple - Apple Cedar Rust
-Cherry - Powdery Mildew
-Grape - Black Measles
-Grape - Leaf Blight
-Potato - Early Blight
-Potato - Late Blight
-Tomato - Curl Virus
-Tomato - Spider Mite
-Tomato - Leaf Mold
-Strawberry - Leaf Scorch
-Apple - Apple Scab
-Apple - Black Rot
+Tomato - Septoria Leaf Spot
+Tomato - Two-Spotted Spider Mite
+Tomato - Target Spot
+Tomato - Tomato Mosaic Virus
+Tomato - Tomato Yellow Leaf Curl Virus
+Tomato - Healthy
