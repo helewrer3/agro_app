@@ -6,7 +6,7 @@
 Traditionally farmers have used their perceptual sensorial systems to diagnose and monitor their crops health and needs. <br/>
 However, humans possess five basic perceptual systems with accuracy levels that can change from human to human which are largely dependent on the stress, experience, health and age.<br/>
 To overcome this problem, in the last decade, with the help of the emergence of smartphone technology, new agronomic applications were developed to reach better, cost-effective, more accurate and portable diagnosis systems.<br/> 
-With apps and websites being used virtually everywhere, we decided to create an all-purpose Flutter application for farmers as our submission for [Vihaan 4.0](https://vihaan.ieeedtu.in/) hackathon.
+With apps and websites being used virtually everywhere, we decided to create an all-purpose Flutter application for farmers.
 
 ## Disclaimer
 
